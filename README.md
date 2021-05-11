@@ -1,24 +1,63 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Prerequisites
 
-Things you may want to cover:
+The setups steps expect following tools installed on the system.
 
-* Ruby version
+- Git
+- Ruby [2.7.0]
+- Rails [6.1.3]
+- MySQL
 
-* System dependencies
+#### 1. Check out the repository
 
-* Configuration
+```bash
+git clone git@github.com:ChrisBeddome/jam-mates_v2.git
+```
 
-* Database creation
+#### 2. Run Bundle
 
-* Database initialization
+```bash
+cd ./jam-mates_v2
+bundle
+```
 
-* How to run the test suite
+#### 3. Create MySQL users and grant necessary privilages
 
-* Services (job queues, cache servers, search engines, etc.)
+```sql
+mysql> CREATE USER 'jam_mates_test_user'@'localhost' IDENTIFIED BY 'jam_mates_test_password';
+mysql> CREATE USER 'jam_mates_dev_user'@'localhost' IDENTIFIED BY 'jam_mates_dev_password';
 
-* Deployment instructions
+mysq> GRANT ALL PRIVILEGES ON jam_mates_test.*  TO 'jam_mates_test_user'@'localhost';
+mysq> GRANT ALL PRIVILEGES ON jam_mates_development.*  TO 'jam_mates_dev_user'@'localhost';
+```
 
-* ...
+#### 4. Create .env file in the root application directory with DB and user configs
+
+```
+DB_TEST = "jam_mates_test"
+DB_USER_TEST = 'jam_mates_test_user'
+DB_PASSWORD_TEST = 'jam_mates_test_password'
+
+DB_DEV = "jam_mates_development"
+DB_USER_DEV = 'jam_mates_dev_user'
+DB_PASSWORD_DEV = 'jam_mates_dev_password'
+```
+
+#### 5. Create and setup the database
+
+Run the following command to create and setup the database.
+
+```ruby
+rails db:create
+```
+
+#### 6. Start the Rails server
+
+You can start the rails server using the command given below.
+
+```ruby
+rails s
+```
+
+And now you can visit the site with the URL http://localhost:3000
