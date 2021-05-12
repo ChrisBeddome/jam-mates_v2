@@ -9,17 +9,9 @@ gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Shim to load environment variables from .env into ENV in development.
-gem 'dotenv-rails', groups: %i[development test]
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -30,6 +22,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # Shim to load environment variables from .env into ENV in development.
+  gem 'dotenv-rails', groups: %i[development test]  
 end
 
 group :development do
