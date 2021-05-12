@@ -51,7 +51,7 @@ bundle
 
 #### 3. Create MySQL users and grant necessary privileges
 
-When creating the database, rails expects a test and dev user exist within the database. These users go by any username. Be sure to use the same username and password when creating the `.env` file 
+When creating the database, rails expects a test and dev user exist within the database. These users may go by any username. Be sure to use the same username and password when creating the `.env` file 
   
 
 ```sql
