@@ -1,5 +1,11 @@
 # README
 
+## About
+
+Rails API backend for Jam Mates application.
+
+## Setup
+
 #### Prerequisites
 
 The setups steps expect following tools installed on the system.
@@ -60,4 +66,6 @@ You can start the rails server using the command given below.
 rails s
 ```
 
-And now you can visit the site with the URL http://localhost:3000
+## Authentication
+
+## End Points
