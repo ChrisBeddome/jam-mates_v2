@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Users", type: :request do
-  describe "GET /create" do
+  describe "POST /create" do
     before(:each) do
       post("/users", params: {user: user_params})
     end
