@@ -5,25 +5,11 @@ require "rails_helper"
 RSpec.describe User, type: :model do
   let(:user) { build :user, attrs }
   let(:valid_attrs) {
-    {first_name: "Tony", last_name: "Macaroni", email: "tony@macaroni.com", password: "password123"}
+    {email: "tony@macaroni.com", password: "password123"}
   }
 
   context "with valid attributes" do
     let(:attrs) { valid_attrs }
-    it "is valid" do
-      expect(user).to be_valid
-    end
-  end
-
-  context "without first_name" do
-    let(:attrs) { valid_attrs.merge({first_name: nil}) }
-    it "is invalid" do
-      expect(user).to be_invalid
-    end
-  end
-
-  context "without last_name" do
-    let(:attrs) { valid_attrs.merge({last_name: nil}) }
     it "is valid" do
       expect(user).to be_valid
     end
@@ -56,5 +42,4 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
   end
-
 end

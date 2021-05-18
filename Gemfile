@@ -15,6 +15,9 @@ gem "puma", "~> 5.0"
 gem "bcrypt", "~> 3.1.7"
 gem "jwt"
 
+#model serializer
+gem 'active_model_serializers'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 

@@ -16,15 +16,20 @@ RSpec.describe "Users", type: :request do
     end
 
     context "when user param passed" do
-      let(:valid_user_params) { {first_name: "Test", last_name: "User", email: "test@user.com", password: "password"} }
+      let(:valid_user_params) { {email: "test@user.com", password: "password"} }
 
       context "with valid params" do
         let(:user_params) { valid_user_params }
         it { is_expected.to have_http_status :created }
-        it "should contain correct data in response body" do
+        it "contains correct data in response body" do
           expect(JSON.parse(response.body)).to eq({
-                                                    user: valid_user_params
+                                                    "email" => "test@user.com",
+                                                    "id" => User.last.id,
+                                                    "profile" => nil
                                                   })
+        end
+        xit "creates a new record" do
+          #how to hook into state before before:each???
         end
       end
     end
