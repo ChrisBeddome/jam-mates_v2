@@ -23,13 +23,15 @@ RSpec.describe "Users", type: :request do
         it { is_expected.to have_http_status :created }
         it "contains correct data in response body" do
           expect(JSON.parse(response.body)).to eq({
-                                                    "email" => "test@user.com",
-                                                    "id" => User.last.id,
-                                                    "profile" => nil
+                                                    "user" => {
+                                                      "email" => "test@user.com",
+                                                      "id" => User.last.id,
+                                                      "profile" => nil
+                                                    }
                                                   })
         end
         xit "creates a new record" do
-          #how to hook into state before before:each???
+          # how to hook into state before before:each???
         end
       end
     end
