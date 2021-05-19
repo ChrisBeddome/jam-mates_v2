@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe "Users", type: :request do
-  describe "POST /create" do
+RSpec.describe "Authentication", type: :request do
+  describe "POST /register" do
     before(:each) do
-      post("/users", params: {user: user_params})
+      post("/auth/register", params: {user: user_params})
     end
 
     subject { response }
@@ -31,7 +31,7 @@ RSpec.describe "Users", type: :request do
                                                   })
         end
         it "creates a new record" do
-          expect { post("/users", params: {user: user_params.merge(email: "test@user2.com")}) }.to change {
+          expect { post("/auth/register", params: {user: user_params.merge(email: "test@user2.com")}) }.to change {
                                                                                                      User.count
                                                                                                    }.by(1)
         end
