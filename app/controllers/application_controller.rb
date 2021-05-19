@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from ActionController::ParameterMissing, with: :unprocessable_entity
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found #TEST THESE
+  rescue_from ActionController::ParameterMissing, with: :unprocessable_entity #TEST THESE
+  rescue_from ActionController::UnpermittedParameters, with: :unprocessable_entity #TEST THESE
 
   def current_user
     @current_user ||= user_from_token
