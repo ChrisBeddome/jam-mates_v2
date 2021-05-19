@@ -30,8 +30,10 @@ RSpec.describe "Users", type: :request do
                                                     }
                                                   })
         end
-        xit "creates a new record" do
-          # how to hook into state before before:each???
+        it "creates a new record" do
+          expect { post("/users", params: {user: user_params.merge(email: "test@user2.com")}) }.to change {
+                                                                                                     User.count
+                                                                                                   }.by(1)
         end
       end
     end
