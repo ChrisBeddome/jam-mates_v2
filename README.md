@@ -49,22 +49,21 @@ bundle
 
   
 
-#### 3. Create MySQL users and grant necessary privileges
+#### 3. Create MySQL users
 
-When creating the database, rails expects a test and dev user exist within the database. These users may go by any username. Be sure to use the same username and password when creating the `.env` file 
+When creating the database, rails expects a test and dev user exist within the database.
   
 
 ```sql
 
-mysql> CREATE USER 'jam_mates_test_user'@'localhost' IDENTIFIED BY  'jam_mates_test_password';
-mysql> CREATE USER 'jam_mates_dev_user'@'localhost' IDENTIFIED BY  'jam_mates_dev_password';
-
-mysq> GRANT ALL PRIVILEGES ON jam_mates_test.* TO  'jam_mates_test_user'@'localhost';
-mysq> GRANT ALL PRIVILEGES ON jam_mates_development.* TO  'jam_mates_dev_user'@'localhost';
+CREATE USER 'jam_mates_test_user'@'localhost' IDENTIFIED BY  'jam_mates_test_password';
+CREATE USER 'jam_mates_dev_user'@'localhost' IDENTIFIED BY  'jam_mates_dev_password';
 
 ```
 
 #### 4. Create .env file in the root application directory with DB and user configs
+
+Be sure to use the same usernames and passwords when used in the previous step
 
 ```
 
@@ -91,9 +90,20 @@ rails  db:setup
 
 ```
 
+
+#### 6. Grant MySQL users necessary privileges
+
+
+```sql
+
+GRANT ALL PRIVILEGES ON jam_mates_test.* TO  'jam_mates_test_user'@'localhost';
+GRANT ALL PRIVILEGES ON jam_mates_development.* TO  'jam_mates_dev_user'@'localhost';
+
+```
+
   
 
-#### 6. Start the Rails server
+#### 7. Start the Rails server
 
   
 
