@@ -71,7 +71,7 @@ DB_TEST = "jam_mates_test"
 DB_USER_TEST = 'jam_mates_test_user'
 DB_PASSWORD_TEST = 'jam_mates_test_password'
 
-DB_DEV = "jam_mates_development"
+DB_DEV = "jam_mates_dev"
 DB_USER_DEV = 'jam_mates_dev_user'
 DB_PASSWORD_DEV = 'jam_mates_dev_password'
 
@@ -97,7 +97,7 @@ rails  db:setup
 ```sql
 
 GRANT ALL PRIVILEGES ON jam_mates_test.* TO  'jam_mates_test_user'@'localhost';
-GRANT ALL PRIVILEGES ON jam_mates_development.* TO  'jam_mates_dev_user'@'localhost';
+GRANT ALL PRIVILEGES ON jam_mates_dev.* TO  'jam_mates_dev_user'@'localhost';
 
 ```
 
