@@ -49,7 +49,7 @@ bundle
 
   
 
-#### 3. Create MySQL users
+#### 3. Create MySQL users and grant necessary privileges
 
 When creating the database, rails expects a test and dev user exist within the database.
   
@@ -58,6 +58,9 @@ When creating the database, rails expects a test and dev user exist within the d
 
 CREATE USER 'jam_mates_test_user'@'localhost' IDENTIFIED BY  'jam_mates_test_password';
 CREATE USER 'jam_mates_dev_user'@'localhost' IDENTIFIED BY  'jam_mates_dev_password';
+
+GRANT ALL PRIVILEGES ON jam_mates_test.* TO  'jam_mates_test_user'@'localhost';
+GRANT ALL PRIVILEGES ON jam_mates_dev.* TO  'jam_mates_dev_user'@'localhost';
 
 ```
 
@@ -77,7 +80,7 @@ DB_PASSWORD_DEV = 'jam_mates_dev_password'
 
 ```
 
-#### 5. Create and setup the database
+#### 5. Create the database
 
 Run the following command to create and setup the database.
 
@@ -87,22 +90,9 @@ Run the following command to create and setup the database.
 
 rails  db:create
 
-```
+```  
 
-
-#### 6. Grant MySQL users necessary privileges
-
-
-```sql
-
-GRANT ALL PRIVILEGES ON jam_mates_test.* TO  'jam_mates_test_user'@'localhost';
-GRANT ALL PRIVILEGES ON jam_mates_dev.* TO  'jam_mates_dev_user'@'localhost';
-
-```
-
-  
-
-#### 7. Start the Rails server
+#### 6. Start the Rails server
 
   
 
@@ -112,7 +102,7 @@ You can start the rails server using the command given below.
 
 ```ruby
 
-rails  s
+rails s
 
 ```
 
