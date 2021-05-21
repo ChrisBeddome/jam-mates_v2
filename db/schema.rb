@@ -15,6 +15,9 @@ ActiveRecord::Schema.define(version: 2021_05_18_020247) do
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.date "birth_date"
+    t.decimal "latitude", precision: 10
+    t.decimal "longitude", precision: 10
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

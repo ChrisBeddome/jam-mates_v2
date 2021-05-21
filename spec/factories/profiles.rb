@@ -4,6 +4,9 @@ FactoryBot.define do
   factory :profile do
     first_name      { "Test" }
     last_name       { "User" }
+    birth_date      { Date.current - 20.years }
+    latitude        { 50 }
+    longitude       { 50 }
     user            { build(:user) }
   end
 end
