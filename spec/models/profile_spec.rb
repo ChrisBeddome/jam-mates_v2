@@ -57,6 +57,21 @@ RSpec.describe Profile, type: :model do
     end
   end
 
+  context "with bio" do
+    context "bio too long" do
+      let(:attrs) { valid_attrs.merge({bio: (1..1501).map {|_x| "a" }.join}) }
+      it "is invalid" do
+        expect(profile).to be_invalid
+      end
+    end
+    context "with valid bio" do
+      let(:attrs) { valid_attrs.merge({bio: (1..1500).map {|_x| "a" }.join}) }
+      it "is valid" do
+        expect(profile).to be_valid
+      end
+    end
+  end
+
   context "birth_date less than 18 years ago" do
     let(:attrs) { valid_attrs.merge({birth_date: Date.today - 17.years}) }
     it "is invalid" do

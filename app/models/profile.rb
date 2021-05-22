@@ -5,6 +5,7 @@ class Profile < ApplicationRecord
   validates :first_name, presence: true, length: {maximum: 64}
   validates :last_name, presence: false, length: {maximum: 64}
   validates :birth_date, presence: true
+  validates :bio, length: {maximum: 1500}
   validates :latitude, presence: true, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90}
   validates :longitude, presence: true, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180}
 

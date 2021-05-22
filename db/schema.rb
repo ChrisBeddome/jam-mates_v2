@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_020247) do
     t.string "first_name"
     t.string "last_name"
     t.date "birth_date"
+    t.text "bio"
     t.decimal "latitude", precision: 10
     t.decimal "longitude", precision: 10
     t.bigint "user_id", null: false

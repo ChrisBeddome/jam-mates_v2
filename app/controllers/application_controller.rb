@@ -5,6 +5,9 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :unprocessable_entity
   rescue_from ActionController::UnpermittedParameters, with: :unprocessable_entity
 
+  class ActionController::Unauthorized < StandardError; end
+  rescue_from ActionController::Unauthorized, with: :unauthorized
+
   def current_user
     @current_user ||= user_from_token
   end
@@ -27,11 +30,21 @@ class ApplicationController < ActionController::API
     header.gsub(pattern, "") if header&.match(pattern)
   end
 
+  protected
+
+  def authenticate_user
+    raise ActionController::Unauthorized unless current_user
+  end
+
   def not_found
     head :not_found
   end
 
   def unprocessable_entity
     head :unprocessable_entity
+  end
+
+  def unauthorized
+    head :unauthorized
   end
 end

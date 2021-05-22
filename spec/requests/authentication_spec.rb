@@ -10,13 +10,18 @@ RSpec.describe "Authentication", type: :request do
 
     subject { response }
 
-    context "when no user param passed" do
-      let(:user_params) { nil }
+    context "when no user params passed" do
+      let(:user_params) { nil } 
       it { is_expected.to have_http_status :unprocessable_entity }
     end
 
     context "when user param passed" do
       let(:valid_user_params) { {email: "test@user.com", password: "password"} }
+
+      context "with invalid params" do
+        let(:user_params) { valid_user_params.merge(password: "a") }
+        it { is_expected.to have_http_status :unprocessable_entity }
+      end
 
       context "with valid params" do
         let(:user_params) { valid_user_params }
