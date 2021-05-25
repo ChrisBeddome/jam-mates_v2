@@ -3,6 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Profile, type: :model do
+  let(:user) { create :user }
   let(:profile) { build :profile, attrs }
   let(:valid_attrs) {
     {
@@ -11,7 +12,7 @@ RSpec.describe Profile, type: :model do
       birth_date: Date.new(1990),
       latitude: 30,
       longitude: -50,
-      user: build(:user)
+      user: user
     }
   }
 
@@ -117,6 +118,14 @@ RSpec.describe Profile, type: :model do
     let(:attrs) { valid_attrs.merge({user: nil}) }
     it "is invalid" do
       expect(profile).to be_invalid
+    end
+  end
+
+  context "with user already taken" do
+    let(:attrs) { valid_attrs }
+    it "is invalid" do
+      profile.save
+      expect(build(:profile, valid_attrs)).to be_invalid
     end
   end
 end

@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  before_action :authenticate_user, only: %i[create update destroy]
+  load_and_authorize_resource only: %i[create update destroy]
 
   def create
-    profile = Profile.new(profile_params)
-    #authorize
+    if @profile.save
+      render json: @profile, status: :created
+    else
+      render json: {errors: @profile.errors.full_messages},
+             status: :unprocessable_entity
+    end
   end
 
-  def show
-  end
+  def show; end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 

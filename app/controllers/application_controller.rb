@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  before_action :current_user
+
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::ParameterMissing, with: :unprocessable_entity
   rescue_from ActionController::UnpermittedParameters, with: :unprocessable_entity
+  rescue_from CanCan::AccessDenied, with: :unauthorized
 
   class ActionController::Unauthorized < StandardError; end
   rescue_from ActionController::Unauthorized, with: :unauthorized
@@ -31,10 +34,6 @@ class ApplicationController < ActionController::API
   end
 
   protected
-
-  def authenticate_user
-    raise ActionController::Unauthorized unless current_user
-  end
 
   def not_found
     head :not_found

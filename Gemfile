@@ -15,6 +15,8 @@ gem "puma", "~> 5.0"
 gem "bcrypt", "~> 3.1.7"
 gem "jwt"
 
+gem "cancancan", "~>3.2.1"
+
 #model serializer
 gem 'active_model_serializers', '~> 0.10.0'
 
@@ -31,6 +33,7 @@ group :development, :test do
   gem "dotenv-rails", groups: %i[development test]
   # Testing framework
   gem "factory_bot_rails", "~> 6.2.0"
+  gem "ffaker", "~> 2.18.0"
   gem "rspec-rails", "~> 5.0.0"
 end
 
