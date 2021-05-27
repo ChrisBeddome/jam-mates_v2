@@ -8,9 +8,6 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::UnpermittedParameters, with: :unprocessable_entity
   rescue_from CanCan::AccessDenied, with: :unauthorized
 
-  class ActionController::Unauthorized < StandardError; end
-  rescue_from ActionController::Unauthorized, with: :unauthorized
-
   def current_user
     @current_user ||= user_from_token
   end

@@ -29,7 +29,6 @@ RSpec.describe "Authentication", type: :request do
         it "contains correct data in response body" do
           expect(JSON.parse(response.body)).to eq({
                                                     "user" => {
-                                                      "email" => "test@user.com",
                                                       "id" => User.last.id,
                                                       "profile" => nil
                                                     }
@@ -64,8 +63,7 @@ RSpec.describe "Authentication", type: :request do
         let(:credential_params) { valid_credentials }
         it { is_expected.to have_http_status :ok }
         it "contains correct user data in response body" do
-          expect(JSON.parse(response.body)["user"]).to eq({
-                                                            "email" => "test@user.com",
+          expect(JSON.parse(response.body)["user"]).to eq({ 
                                                             "id" => User.last.id,
                                                             "profile" => nil
                                                           })

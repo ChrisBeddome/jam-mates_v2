@@ -9,13 +9,13 @@ RSpec.describe "Profiles", type: :request do
     {
       user_id: user.id,
       first_name: "Tony",
-      birth_date: "17/11/1990",
+      birth_date: "1990-11-17",
       latitude: 45,
       longitude: 90
     }
   }
 
-  describe "POST /create" do
+  describe "POST" do
     before(:each) do
       post("/profiles",
            headers: {Authorization: auth_header},
@@ -59,10 +59,12 @@ RSpec.describe "Profiles", type: :request do
             it { is_expected.to have_http_status :created }
             it "contains correct data in response body" do
               expect(JSON.parse(response.body)).to eq({
-                                                        "user" => {
-                                                          "email" => "test@user.com",
-                                                          "id" => User.last.id,
-                                                          "profile" => nil
+                                                        "profile" => {
+                                                          "id" => user.profile.id,
+                                                          "user_id" => user.id,
+                                                          "first_name" => "Tony",
+                                                          "birth_date" => "1990-11-17",
+                                                          "bio" => nil
                                                         }
                                                       })
             end
@@ -73,14 +75,16 @@ RSpec.describe "Profiles", type: :request do
     context "new_user" do
       let(:user2) { create :user }
       let(:token_for_user2) { AuthenticationTokenService.encode(user_id: user2.id) }
-      let(:profile_params) { valid_profile_params }
+      let(:profile_params) { valid_profile_params.merge(user_id: user2.id) }
       let(:auth_header) { "Bearer #{token_for_user2}" }
       it "creates a new record" do
-        expect post("/profiles",
-                    headers: {Authorization: auth_header},
-                    params: {profile: profile_params}).to change {
-                                                            Profile.count
-                                                          }.by(1)
+        expect {
+          post("/profiles",
+               headers: {Authorization: auth_header},
+               params: {profile: profile_params})
+        }.to change {
+               Profile.count
+             }.by(1)
       end
     end
   end

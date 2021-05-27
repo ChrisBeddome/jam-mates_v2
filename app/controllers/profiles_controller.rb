@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def create
     if @profile.save
-      render json: @profile, status: :created
+      render json: {profile: ProfileSerializer.new(@profile).serializable_hash}, status: :created
     else
       render json: {errors: @profile.errors.full_messages},
              status: :unprocessable_entity
