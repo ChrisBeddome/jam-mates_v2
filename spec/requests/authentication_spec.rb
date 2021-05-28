@@ -3,12 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "Authentication", type: :request do
+  subject { response }
+
   describe "POST /register" do
     before(:each) do
       post("/auth/register", params: {user: user_params})
     end
-
-    subject { response }
 
     context "when no user params passed" do
       let(:user_params) { nil } 
@@ -48,8 +48,6 @@ RSpec.describe "Authentication", type: :request do
     before(:each) do
       post("/auth/login", params: {credentials: credential_params})
     end
-
-    subject { response }
 
     context "when no credential passed" do
       let(:credential_params) { nil }

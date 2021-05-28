@@ -15,14 +15,14 @@ RSpec.describe "Profiles", type: :request do
     }
   }
 
+  subject { response }
+
   describe "POST" do
     before(:each) do
       post("/profiles",
            headers: {Authorization: auth_header},
            params: {profile: profile_params})
     end
-
-    subject { response }
 
     context "when no access token given" do
       let(:profile_params) { valid_profile_params }
@@ -75,13 +75,13 @@ RSpec.describe "Profiles", type: :request do
     context "new_user" do
       let(:user2) { create :user }
       let(:token_for_user2) { AuthenticationTokenService.encode(user_id: user2.id) }
-      let(:profile_params) { valid_profile_params.merge(user_id: user2.id) }
       let(:auth_header) { "Bearer #{token_for_user2}" }
+      let(:profile_params) { nil }
       it "creates a new record" do
         expect {
           post("/profiles",
                headers: {Authorization: auth_header},
-               params: {profile: profile_params})
+               params: {profile: valid_profile_params.merge(user_id: user2.id)})
         }.to change {
                Profile.count
              }.by(1)
