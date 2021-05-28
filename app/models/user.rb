@@ -7,5 +7,5 @@ class User < ApplicationRecord
             length: {minimum: 6},
             if: -> { new_record? || !password.nil? }
 
-  has_one :profile
+  has_one :profile, dependent: :destroy
 end

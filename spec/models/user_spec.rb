@@ -42,4 +42,12 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
   end
+
+  describe "#destroy" do
+    let!(:user) { create :user }
+    let!(:profile) { create(:profile, user: user) }
+    it "should destroy associated profile" do
+      expect { user.destroy }.to change { Profile.count }.by(-1)
+    end
+  end
 end

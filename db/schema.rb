@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_020247) do
+ActiveRecord::Schema.define(version: 2021_05_28_003547) do
+
+  create_table "instruments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name"
@@ -23,6 +27,15 @@ ActiveRecord::Schema.define(version: 2021_05_18_020247) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "profiles_instruments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "profile_id", null: false
+    t.bigint "instrument_id", null: false
+    t.index ["instrument_id", "profile_id"], name: "index_profiles_instruments_on_instrument_id_and_profile_id"
+    t.index ["instrument_id"], name: "index_profiles_instruments_on_instrument_id"
+    t.index ["profile_id", "instrument_id"], name: "index_profiles_instruments_on_profile_id_and_instrument_id"
+    t.index ["profile_id"], name: "index_profiles_instruments_on_profile_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

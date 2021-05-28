@@ -12,6 +12,8 @@ class Profile < ApplicationRecord
   validate :age_of_majority, if: proc {|object| !object.errors.messages.keys.include?(:birth_date) }
 
   belongs_to :user
+  has_many :profile_instruments, dependent: :destroy
+  has_many :instruments, through: :profile_instruments
 
   private
 

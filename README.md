@@ -82,13 +82,14 @@ DB_PASSWORD_DEV = 'jam_mates_dev_password'
 
 #### 5. Create the database
 
-Run the following command to create and setup the database.
+Run the following commands to create and seed the database.
 
   
 
 ```ruby
 
 rails  db:create
+rails  db:seed
 
 ```  
 
